@@ -199,22 +199,22 @@ bash .claudex-run-codex.sh "claudex/tasks/<slug>/review-impl-<round>.md"
 
 7. Check if Codex output contains "good to go" (case-insensitive). If yes, break the loop.
 
-8. Triage findings:
+8. Triage and fix findings **without asking the user**:
 
-   - **High priority**: implement the fix immediately, commit
-   - **Medium / Low priority**: evaluate soundness
-     - If **sound**: implement the fix
-     - If **unsound**: add to the challenges list for the next round's prompt
-     - If Codex **stands firm** on a challenged finding (same finding reappears after challenge): mark as deferred, do not implement
+   - **High priority**: fix immediately and commit — no debate, no confirmation needed
+   - **Medium / Low priority**: evaluate soundness autonomously
+     - If **sound**: implement the fix and commit
+     - If **unsound**: add to the challenges list for the next round's prompt — do NOT ask the user
+     - If Codex **stands firm** on a challenged finding (same finding reappears after challenge): mark as deferred silently
 
-9. Present round summary to the user:
+9. After all findings are triaged and fixed, present a round summary to the user:
    - Fixed findings (with commit hash)
-   - Pending challenges (to be sent next round)
+   - Findings you challenged (will be re-reviewed next round)
    - Deferred findings so far
 
-10. Ask: "Round <N> complete. Proceed to next Codex round?"
+10. Ask: "Round <N> complete. Proceed to next Codex round? (yes / stop)"
 
-Wait for user confirmation before continuing.
+Wait for user confirmation before running the next Codex round. This is the **only** point where user input is required mid-loop.
 
 ---
 
