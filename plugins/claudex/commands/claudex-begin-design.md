@@ -2,7 +2,12 @@
 description: "Start a design session — Claude generates a structured plan doc for the given task"
 argument-hint: "<task description>"
 allowed-tools:
-  - Bash
+  - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/setup-claudex.sh" *)
+  - Bash(ls .claudex-session-*.local.md *)
+  - Bash(cat .claudex-session-*.local.md)
+  - Bash(awk * .claudex-session-*.local.md *)
+  - Bash(mv .claudex-session-*.local.md.tmp .claudex-session-*.local.md)
+  - Bash(mkdir -p claudex/tasks/*)
   - Read
   - Write
   - Edit

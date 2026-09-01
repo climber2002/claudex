@@ -1,7 +1,12 @@
 ---
 description: "Delete completed claudex sessions — removes session files and task artifacts"
 allowed-tools:
-  - Bash
+  - Bash(ls .claudex-session-*.local.md *)
+  - Bash(cat .claudex-session-*.local.md)
+  - Bash(rm -f .claudex-session-*.local.md)
+  - Bash(rm -rf claudex/tasks/*)
+  - Bash(rmdir claudex/tasks)
+  - Bash(rmdir claudex)
   - Read
 ---
 

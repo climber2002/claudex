@@ -1,7 +1,9 @@
 ---
 description: "Cancel the active claudex session and clean up all state"
 allowed-tools:
-  - Bash
+  - Bash(ls .claudex-session-*.local.md *)
+  - Bash(cat .claudex-session-*.local.md)
+  - Bash(rm -f .claudex-session-*.local.md .claudex-codex-prompt.txt .claudex-run-codex.sh .claudex.log)
   - Read
 ---
 

@@ -1,7 +1,13 @@
 ---
 description: "Send the current plan doc to Codex for iterative review — loops until Codex says good to go"
 allowed-tools:
-  - Bash
+  - Bash(bash .claudex-run-codex.sh *)
+  - Bash(ls .claudex-session-*.local.md *)
+  - Bash(cat .claudex-session-*.local.md)
+  - Bash(awk * .claudex-session-*.local.md *)
+  - Bash(mv .claudex-session-*.local.md.tmp .claudex-session-*.local.md)
+  - Bash(rm -f .claudex-codex-prompt.txt .claudex-run-codex.sh)
+  - Bash(mkdir -p claudex/tasks/*)
   - Read
   - Write
   - Edit

@@ -1,7 +1,10 @@
 ---
 description: "Resume an in-progress claudex session — shows all unfinished sessions and lets you pick one"
 allowed-tools:
-  - Bash
+  - Bash(ls .claudex-session-*.local.md *)
+  - Bash(cat .claudex-session-*.local.md)
+  - Bash(awk * .claudex-session-*.local.md *)
+  - Bash(mv .claudex-session-*.local.md.tmp .claudex-session-*.local.md)
   - Read
 ---
 

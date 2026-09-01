@@ -2,7 +2,19 @@
 description: "Implement the plan with an iterative Codex review loop — use --per-subtask for a separate loop per subtask"
 argument-hint: "[--per-subtask] <task description>"
 allowed-tools:
-  - Bash
+  - Bash(bash .claudex-run-codex.sh *)
+  - Bash(bash "${CLAUDE_PLUGIN_ROOT}/scripts/setup-claudex.sh" *)
+  - Bash(git rev-parse --short HEAD)
+  - Bash(git add *)
+  - Bash(git commit *)
+  - Bash(git diff *)
+  - Bash(git log *)
+  - Bash(ls .claudex-session-*.local.md *)
+  - Bash(cat .claudex-session-*.local.md)
+  - Bash(awk * .claudex-session-*.local.md * )
+  - Bash(mv .claudex-session-*.local.md.tmp .claudex-session-*.local.md)
+  - Bash(rm -f .claudex-codex-prompt.txt .claudex-run-codex.sh)
+  - Bash(mkdir -p claudex/tasks/*)
   - Read
   - Write
   - Edit
