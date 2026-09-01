@@ -8,11 +8,15 @@ Inspired by [hamelsmu/claude-review-loop](https://github.com/hamelsmu/claude-rev
 
 ## What it does
 
-Claudex introduces a three-phase workflow with human checkpoints between each phase:
+Claudex centers on `/claudex-impl` — an implementation loop where Claude implements a task and Codex reviews each commit with prioritized findings (High / Medium / Low), looping until Codex signs off or the round cap is hit.
 
-1. **Design** — Claude generates a structured plan doc. You discuss and iterate with Claude directly.
-2. **Design review** — Claude sends the plan to Codex in a loop until Codex says "good to go" (up to 8 rounds).
-3. **Implementation** — Claude implements the plan. Codex reviews each commit, rates findings by priority (High / Medium / Low), and the loop continues until Codex accepts or the round cap is hit.
+The design commands are optional. You can discuss a task with Claude in conversation and go straight to impl, or use the structured design phase for larger tasks:
+
+| Phase              | Command                   | Optional? |
+| ------------------ | ------------------------- | --------- |
+| Design             | `/claudex-begin-design`   | Yes       |
+| Design review      | `/claudex-review-design`  | Yes       |
+| **Implementation** | **`/claudex-impl`**       | **No — this is the core** |
 
 At the end, Claude prompts you to create a PR, merge, and/or clean up session files.
 
@@ -48,15 +52,20 @@ Claude sends the plan to Codex. Codex responds with findings (blockers or sugges
 
 ### 3. Implementation
 
+`/claudex-impl` is independent — it does not require a prior design session.
+
+**After a design session:**
 ```
 /claudex-impl
 ```
+Picks up the existing session and plan doc automatically.
 
-or for larger tasks:
-
+**After a conversation (no design session):**
 ```
-/claudex-impl --per-subtask
+/claudex-impl implement what we just discussed
+/claudex-impl --per-subtask add user authentication with JWT tokens
 ```
+Creates a session on the fly, generates a plan doc from the conversation context, asks you to confirm, then starts the impl loop.
 
 Claude implements the task. After each commit, Codex reviews with:
 

@@ -2,14 +2,19 @@
 
 ## What this is
 
-A Claude Code plugin implementing a three-phase design-and-implementation workflow with iterative Codex review loops:
+A Claude Code plugin centered on an iterative Codex review loop for implementation. `/claudex-impl` is the core command and is independent — it does not require a prior design session.
 
-1. `/claudex-begin-design` — Claude generates a plan doc, user iterates with Claude
-2. `/claudex-review-design` — Claude sends plan to Codex, loops until "good to go"
-3. `/claudex-impl [--per-subtask]` — Claude implements, Codex reviews each commit with priority-rated findings, loops until "good to go"
+Commands:
+1. `/claudex-impl [--per-subtask] <task>` — **core**: create or resume a session, implement, Codex reviews each commit with priority-rated findings, loops until "good to go"
+2. `/claudex-begin-design <task>` — optional: generate a structured plan doc and discuss with Claude
+3. `/claudex-review-design` — optional: send the plan to Codex for iterative review
 4. `/claudex-resume` — resume an in-progress session in a new Claude conversation
 5. `/claudex-clean` — delete completed sessions and their task artifacts
 6. `/claudex-cancel` — cancel and clean up an active session
+
+`/claudex-impl` resolves its session in order:
+1. Slug matches an existing session file → resume it
+2. No session found → create one, generate plan from conversation context, confirm with user, then impl
 
 ## Session state
 
