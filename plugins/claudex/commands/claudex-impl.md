@@ -1,6 +1,6 @@
 ---
 description: "Implement the plan with an iterative Codex review loop — use --per-subtask for a separate loop per subtask"
-argument-hint: "[--per-subtask]"
+argument-hint: "[--per-subtask] <task description>"
 allowed-tools:
   - Bash
   - Read
@@ -8,17 +8,41 @@ allowed-tools:
   - Edit
 ---
 
-Parse arguments: check if `--per-subtask` is present in `$ARGUMENTS`.
+Parse arguments:
+- Check if `--per-subtask` is present in `$ARGUMENTS`
+- The remaining text after removing `--per-subtask` is the task description
 
-Find and read the session state:
+Derive the slug from the task description (lowercase, spaces → hyphens, strip special chars, truncate at 48 chars).
+
+## Session resolution
+
+Check if a session already exists for this slug:
 
 ```bash
-ls .claudex-session-*.local.md 2>/dev/null
+ls .claudex-session-<slug>.local.md 2>/dev/null
 ```
 
-If no files found, report: "No active claudex session. Run `/claudex-begin-design` first."
-If multiple files found, list them with their `task` and `status` fields and ask the user which one to implement.
-Use the matching session file for all subsequent operations (referred to as `<session-file>` below).
+**If the session file exists** — read it and continue to Resume detection below.
+
+**If no session file exists** — this is a new impl without a prior design phase. Run the setup script:
+
+```bash
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/setup-claudex.sh" --phase impl "<task description>"
+```
+
+Then generate a plan doc at `claudex/tasks/<slug>/plan.md` using the current conversation context:
+- Summarize what was discussed as the Overview
+- Extract concrete subtasks with acceptance criteria from the discussion
+- Note any architecture decisions or constraints mentioned
+- Leave Open questions blank if none were raised
+
+Tell the user: "Generated plan from our discussion at `claudex/tasks/<slug>/plan.md`. Review it and confirm, or say 'looks good' to proceed."
+
+Wait for confirmation before continuing.
+
+**If multiple session files exist for different slugs** — list them with their `task` and `status` fields and ask the user which one to implement.
+
+Use the session file for all subsequent operations (referred to as `<session-file>` below).
 
 ```bash
 cat <session-file>
