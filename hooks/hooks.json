@@ -1,0 +1,29 @@
+{
+  "description": "Claudex hooks: stop hook manages impl loop lifecycle; prompt hook surfaces in-progress sessions",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/stop-hook.sh",
+            "timeout": 30,
+            "statusMessage": "Claudex: checking phase..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/prompt-hook.sh",
+            "timeout": 5,
+            "statusMessage": "Claudex: checking for active sessions..."
+          }
+        ]
+      }
+    ]
+  }
+}

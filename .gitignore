@@ -1,0 +1,6 @@
+# Claudex session state (project-local, not committed)
+.claudex-session-*.local.md
+.claudex-codex-prompt.txt
+.claudex-run-codex.sh
+.claudex.log
+.claudex-prompt-hook-fired.tmp

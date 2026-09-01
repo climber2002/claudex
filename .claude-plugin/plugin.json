@@ -1,0 +1,11 @@
+{
+  "name": "claudex",
+  "version": "0.1.0",
+  "description": "Design and implementation workflow with iterative Codex review loops — Claude plans, Codex reviews, findings are prioritized, loop continues until accepted",
+  "author": {
+    "name": "Andy Wang"
+  },
+  "repository": "https://github.com/climber2002/claudex",
+  "license": "MIT",
+  "keywords": ["code-review", "codex", "design", "workflow", "automation"]
+}
