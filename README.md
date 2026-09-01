@@ -154,9 +154,25 @@ Codex multi-agent mode is required. Claudex enables it automatically in `~/.code
 
 ## Installation
 
+From the CLI:
+
 ```bash
 claude plugin marketplace add climber2002/claudex
-claude plugin install claudex
+claude plugin install claudex@claudex
+```
+
+Or from within a Claude Code session:
+
+```
+/plugin marketplace add climber2002/claudex
+/plugin install claudex@claudex
+```
+
+## Updating
+
+```bash
+claude plugin marketplace update claudex
+claude plugin update claudex@claudex
 ```
 
 ## Configuration
