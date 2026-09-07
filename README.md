@@ -210,7 +210,8 @@ claude plugin update claudex@claudex
 
 ## Configuration
 
-| Variable             | Default                                      | Description                           |
-| -------------------- | -------------------------------------------- | ------------------------------------- |
-| `CLAUDEX_CODEX_FLAGS`| `--dangerously-bypass-approvals-and-sandbox` | Flags passed to the Codex CLI         |
-| `CLAUDEX_MAX_ROUNDS` | `8`                                          | Maximum Codex review rounds per loop  |
+| Variable                   | Default                                      | Description                                                      |
+| -------------------------- | -------------------------------------------- | ---------------------------------------------------------------- |
+| `CLAUDEX_CODEX_FLAGS`      | `--dangerously-bypass-approvals-and-sandbox` | Flags passed to the Codex CLI                                    |
+| `CLAUDEX_MAX_ROUNDS`       | `8`                                          | Maximum Codex review rounds per loop                             |
+| `CLAUDEX_REASONING_EFFORT` | (Codex default)                              | Codex reasoning effort: `low`, `medium`, or `high`. Set to `low` or `medium` to speed up reviews. |

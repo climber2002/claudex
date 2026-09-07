@@ -170,6 +170,7 @@ For cleanup: delete `<session-file>` and `claudex/tasks/<slug>/`.
 - Task slugs are validated to prevent path traversal
 - No secrets or credentials stored in state files
 - Codex flags configurable via `CLAUDEX_CODEX_FLAGS` — never hardcode
+- Reasoning effort configurable via `CLAUDEX_REASONING_EFFORT` (`low`, `medium`, `high`) — appended as `-c model_reasoning_effort=<value>`
 
 ## Testing checklist
 

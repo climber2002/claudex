@@ -197,6 +197,9 @@ log() { echo "[$(date -u +"%Y-%m-%dT%H:%M:%SZ")] $*" >> "$LOG_FILE"; }
 PROMPT_FILE=".claudex-codex-prompt.txt"
 REVIEW_FILE="$1"
 CODEX_FLAGS="${CLAUDEX_CODEX_FLAGS:---dangerously-bypass-approvals-and-sandbox}"
+if [ -n "${CLAUDEX_REASONING_EFFORT:-}" ]; then
+  CODEX_FLAGS="$CODEX_FLAGS -c model_reasoning_effort=\"${CLAUDEX_REASONING_EFFORT}\""
+fi
 log "Starting Codex impl review round"
 codex $CODEX_FLAGS exec "$(cat "$PROMPT_FILE")" > "$REVIEW_FILE" 2>&1
 log "Codex finished (exit=$?)"
