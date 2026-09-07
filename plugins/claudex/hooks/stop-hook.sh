@@ -75,7 +75,7 @@ fi
 
 case "$PHASE" in
   impl)
-    # If a runner script is pending (written by /claudex-impl command), block and
+    # If a runner script is pending (written by /claudex:impl command), block and
     # tell Claude to execute it. The command itself orchestrates the loop; the hook
     # only intervenes if Claude tries to exit mid-loop without running the script.
     if [ -f ".claudex-run-codex.sh" ]; then

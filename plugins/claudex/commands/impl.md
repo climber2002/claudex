@@ -42,6 +42,7 @@ ls .claudex-session-<slug>.local.md 2>/dev/null
 bash "${CLAUDE_PLUGIN_ROOT}/scripts/setup-claudex.sh" --phase impl "<task description>"
 ```
 
+
 Then generate a plan doc at `claudex/tasks/<slug>/plan.md` using the current conversation context:
 - Summarize what was discussed as the Overview
 - Extract concrete subtasks with acceptance criteria from the discussion
@@ -274,7 +275,7 @@ What would you like to do next?
   3. Create a PR then clean up session files
   4. Merge to main then clean up session files
   5. Clean up session files now
-  6. Do nothing (run /claudex-clean later)
+  6. Do nothing (run /claudex:clean later)
 ```
 
 For options 1 / 3: create a PR using `gh pr create`, using the task description and plan doc as the PR body context.

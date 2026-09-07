@@ -15,8 +15,8 @@ while [[ $# -gt 0 ]]; do
       ;;
     --help|-h)
       cat << 'HELP'
-Usage: /claudex-begin-design <task description>
-       /claudex-impl [--per-subtask] <task description>
+Usage: /claudex:begin-design <task description>
+       /claudex:impl [--per-subtask] <task description>
 
 Environment variables:
   CLAUDEX_CODEX_FLAGS   Override codex flags (default: --dangerously-bypass-approvals-and-sandbox)
@@ -65,7 +65,7 @@ fi
 STATE_FILE=".claudex-session-${SLUG}.local.md"
 
 if [ -f "$STATE_FILE" ]; then
-  echo "Error: A claudex session for '${SLUG}' is already active. Use /claudex-cancel to abort it first."
+  echo "Error: A claudex session for '${SLUG}' is already active. Use /claudex:cancel to abort it first."
   exit 1
 fi
 
@@ -99,7 +99,7 @@ STATE_EOF
 cat > "$SUBTASKS_PATH" << SUBTASKS_EOF
 # Subtasks — ${TASK}
 
-<!-- Populated by /claudex-impl when implementation begins -->
+<!-- Populated by /claudex:impl when implementation begins -->
 SUBTASKS_EOF
 
 echo ""
@@ -111,5 +111,5 @@ echo "  Plan:     ${PLAN_PATH}"
 echo "  Subtasks: ${SUBTASKS_PATH}"
 echo "  Session:  ${STATE_FILE}"
 echo ""
-echo "  Use /claudex-cancel to abort."
+echo "  Use /claudex:cancel to abort."
 echo ""

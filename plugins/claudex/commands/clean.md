@@ -20,7 +20,7 @@ If no files found, report: "No claudex sessions found."
 
 Read each session file and filter to those where `status` is `done`. Extract `task`, `slug`, `last_active` from each.
 
-If no done sessions found, report: "No completed claudex sessions to clean. Run `/claudex-resume` to see active sessions."
+If no done sessions found, report: "No completed claudex sessions to clean. Run `/claudex:resume` to see active sessions."
 
 Print a numbered list of completed sessions:
 

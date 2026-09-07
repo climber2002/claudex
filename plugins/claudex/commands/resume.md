@@ -14,11 +14,11 @@ Find all session files:
 ls .claudex-session-*.local.md 2>/dev/null
 ```
 
-If no files found, report: "No claudex sessions found. Start one with `/claudex-begin-design`."
+If no files found, report: "No claudex sessions found. Start one with `/claudex:begin-design`."
 
 Read each session file and filter to those where `status` is not `done`. For each, extract: `task`, `phase`, `status`, `current_subtask`, `total_subtasks`, `last_active`, `slug`.
 
-If no unfinished sessions found, report: "No active claudex sessions. All sessions are complete. Use `/claudex-clean` to remove finished sessions."
+If no unfinished sessions found, report: "No active claudex sessions. All sessions are complete. Use `/claudex:clean` to remove finished sessions."
 
 Print a numbered summary of unfinished sessions:
 
@@ -70,4 +70,4 @@ If yes:
 - Continue from where the session left off:
   - Phase `design`: re-open the plan doc and remind the user where the discussion was
   - Phase `design-review`: ask "Re-run Codex design review, or go back to editing the plan?"
-  - Phase `impl`: continue the impl loop from `current_subtask` at the current `round` — follow the resume detection flow in `/claudex-impl`
+  - Phase `impl`: continue the impl loop from `current_subtask` at the current `round` — follow the resume detection flow in `/claudex:impl`

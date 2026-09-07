@@ -19,7 +19,7 @@ Find and read the session state:
 ls .claudex-session-*.local.md 2>/dev/null
 ```
 
-If no files found, report: "No active claudex session. Run `/claudex-begin-design` first."
+If no files found, report: "No active claudex session. Run `/claudex:begin-design` first."
 If multiple files found, list them with their `task` field and ask the user which one to review.
 Use the matching session file for all subsequent operations (referred to as `<session-file>` below).
 
@@ -29,7 +29,7 @@ cat <session-file>
 
 Check that `phase` is `design`. If it's `impl`, report: "Session is already in impl phase."
 
-Read the plan doc at `plan_path`. If it doesn't exist, report: "Plan doc not found at `<plan_path>`. Run `/claudex-begin-design` to generate it."
+Read the plan doc at `plan_path`. If it doesn't exist, report: "Plan doc not found at `<plan_path>`. Run `/claudex:begin-design` to generate it."
 
 Transition the phase to `design-review` and update `last_active` (use awk rewrite, NOT sed):
 
@@ -93,8 +93,8 @@ Wait for user confirmation before proceeding to the next round.
 
 After the loop ends (either "good to go" or round cap hit):
 
-- If "good to go": transition phase back to `design` and tell the user the plan is approved — run `/claudex-impl` when ready to implement
-- If round cap hit: warn the user — "Max rounds reached without Codex approval. Review the plan manually before proceeding with `/claudex-impl`."
+- If "good to go": transition phase back to `design` and tell the user the plan is approved — run `/claudex:impl` when ready to implement
+- If round cap hit: warn the user — "Max rounds reached without Codex approval. Review the plan manually before proceeding with `/claudex:impl`."
 
 Update `last_active` in the session file.
 

@@ -47,6 +47,6 @@ for entry in "${IN_PROGRESS[@]}"; do
   IFS='|' read -r slug task phase last <<< "$entry"
   MSG+="  • ${task} (phase: ${phase}, last active: ${last})"$'\n'
 done
-MSG+="Run \`/claudex-resume\` to continue one of these sessions."
+MSG+="Run \`/claudex:resume\` to continue one of these sessions."
 
 jq -n --arg m "$MSG" '{context: $m}' 2>/dev/null || printf '{}\n'

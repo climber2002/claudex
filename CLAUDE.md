@@ -2,17 +2,18 @@
 
 ## What this is
 
-A Claude Code plugin centered on an iterative Codex review loop for implementation. `/claudex-impl` is the core command and is independent — it does not require a prior design session.
+A Claude Code plugin centered on an iterative Codex review loop for implementation. `/claudex:impl` is the core command and is independent — it does not require a prior design session.
 
 Commands:
-1. `/claudex-impl [--per-subtask] <task>` — **core**: create or resume a session, implement, Codex reviews each commit with priority-rated findings, loops until "good to go"
-2. `/claudex-begin-design <task>` — optional: generate a structured plan doc and discuss with Claude
-3. `/claudex-review-design` — optional: send the plan to Codex for iterative review
-4. `/claudex-resume` — resume an in-progress session in a new Claude conversation
-5. `/claudex-clean` — delete completed sessions and their task artifacts
-6. `/claudex-cancel` — cancel and clean up an active session
+1. `/claudex:impl [--per-subtask] <task>` — **core**: create or resume a session, implement, Codex reviews each commit with priority-rated findings, loops until "good to go"
+2. `/claudex:begin-design <task>` — optional: generate a structured plan doc and discuss with Claude
+3. `/claudex:review-design` — optional: send the plan to Codex for iterative review
+4. `/claudex:resume` — resume an in-progress session in a new Claude conversation
+5. `/claudex:clean` — delete completed sessions and their task artifacts
+6. `/claudex:cancel` — cancel and clean up an active session
+7. "use claudex to review …" — run a one-shot or looping Codex review on a diff, commit, or file; no session state
 
-`/claudex-impl` resolves its session in order:
+`/claudex:impl` resolves its session in order:
 1. Slug matches an existing session file → resume it
 2. No session found → create one, generate plan from conversation context, confirm with user, then impl
 
@@ -49,16 +50,16 @@ Tracks per-subtask status using GitHub-style checkboxes:
 ### Status transitions
 
 ```
-not_started → in_progress  (when /claudex-impl begins)
+not_started → in_progress  (when /claudex:impl begins)
 in_progress → done         (when all subtasks complete and Codex says "good to go")
 ```
 
 ### Phase transitions
 
 ```
-design → design-review  (when /claudex-review-design starts)
+design → design-review  (when /claudex:review-design starts)
 design-review → design  (when design review loop exits)
-design → impl           (when /claudex-impl starts)
+design → impl           (when /claudex:impl starts)
 impl → done             (when all impl loops complete)
 ```
 
@@ -158,7 +159,7 @@ What would you like to do next?
   3. Create a PR then clean up session files
   4. Merge to main then clean up session files
   5. Clean up session files now
-  6. Do nothing (run /claudex-clean later)
+  6. Do nothing (run /claudex:clean later)
 ```
 
 For PR creation: use `gh pr create` with the task description and plan doc as context.

@@ -44,5 +44,5 @@ Then tell the user:
 
 - The plan has been written to `<plan_path>`
 - They can discuss and iterate on the plan directly in this conversation
-- When the plan is ready for Codex review, run `/claudex-review-design`
-- To cancel and start over, run `/claudex-cancel`
+- When the plan is ready for Codex review, run `/claudex:review-design`
+- To cancel and start over, run `/claudex:cancel`

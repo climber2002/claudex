@@ -4,12 +4,13 @@
 
 A Claude Code plugin implementing a three-phase design-and-implementation workflow with iterative Codex review loops:
 
-1. `/claudex-begin-design` — Claude generates a plan doc, user iterates with Claude
-2. `/claudex-review-design` — Claude sends plan to Codex, loops until "good to go"
-3. `/claudex-impl [--per-subtask]` — Claude implements, Codex reviews each commit with priority-rated findings, loops until "good to go"
-4. `/claudex-resume` — resume an in-progress session in a new Claude conversation
-5. `/claudex-clean` — delete completed sessions and their task artifacts
-6. `/claudex-cancel` — cancel and clean up an active session
+1. `/claudex:begin-design` — Claude generates a plan doc, user iterates with Claude
+2. `/claudex:review-design` — Claude sends plan to Codex, loops until "good to go"
+3. `/claudex:impl [--per-subtask]` — Claude implements, Codex reviews each commit with priority-rated findings, loops until "good to go"
+4. `/claudex:resume` — resume an in-progress session in a new Claude conversation
+5. `/claudex:clean` — delete completed sessions and their task artifacts
+6. `/claudex:cancel` — cancel and clean up an active session
+7. "use claudex to review …" — one-shot or looping Codex review on a diff, commit, or file; no session state
 
 ## Session state
 
@@ -44,16 +45,16 @@ Tracks per-subtask status using GitHub-style checkboxes:
 ### Status transitions
 
 ```
-not_started → in_progress  (when /claudex-impl begins)
+not_started → in_progress  (when /claudex:impl begins)
 in_progress → done         (when all subtasks complete and Codex says "good to go")
 ```
 
 ### Phase transitions
 
 ```
-design → design-review  (when /claudex-review-design starts)
+design → design-review  (when /claudex:review-design starts)
 design-review → design  (when design review loop exits)
-design → impl           (when /claudex-impl starts)
+design → impl           (when /claudex:impl starts)
 impl → done             (when all impl loops complete)
 ```
 
@@ -153,7 +154,7 @@ What would you like to do next?
   3. Create a PR then clean up session files
   4. Merge to main then clean up session files
   5. Clean up session files now
-  6. Do nothing (run /claudex-clean later)
+  6. Do nothing (run /claudex:clean later)
 ```
 
 For PR creation: use `gh pr create` with the task description and plan doc as context.
